@@ -73,17 +73,18 @@ function TaskTracker() {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>Task Tracker</Typography>
+    <Container style={{ backgroundColor: '#f0f8ff', padding: '20px' }}> {/* light background color */}
+      <Typography variant="h4" gutterBottom style={{ color: '#4caf50' }}>Task Tracker</Typography> {/* Green color for title */}
 
       {/* Event Selection Dropdown */}
-      <FormControl fullWidth margin="normal">
+      <FormControl fullWidth margin="normal" style={{ backgroundColor: '#ffffff' }}> {/* White background for input */}
         <InputLabel id="event-select-label">Select Event</InputLabel>
         <Select
           labelId="event-select-label"
           value={selectedEvent}
           label="Select Event"
           onChange={handleEventChange}
+          style={{ backgroundColor: '#e8f5e9' }} // light green background color for select input
         >
           {events.map(event => (
             <MenuItem key={event._id} value={event._id}>{event.name}</MenuItem>
@@ -94,19 +95,19 @@ function TaskTracker() {
       {/* Display tasks for selected event */}
       {selectedEvent && (
         <>
-          <Typography variant="h6" gutterBottom>Tasks</Typography>
-          <LinearProgress variant="determinate" value={calculateProgress()} />
-          <Typography variant="body1" gutterBottom>{calculateProgress()}% Completed</Typography>
+          <Typography variant="h6" gutterBottom style={{ color: '#3f51b5' }}>Tasks</Typography> {/* Blue color for tasks section */}
+          <LinearProgress variant="determinate" value={calculateProgress()} style={{ marginBottom: '20px', backgroundColor: '#dbe5e5', height: '10px' }} /> {/* Light background for progress bar */}
+          <Typography variant="body1" gutterBottom style={{ color: '#9e9e9e' }}>{calculateProgress()}% Completed</Typography> {/* Grey text for progress info */}
 
           <Grid container spacing={2}>
             {tasks.map(task => (
               <Grid item xs={12} sm={6} md={4} key={task._id}>
-                <Card>
+                <Card style={{ backgroundColor: '#f44336', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
                   <CardContent>
-                    <Typography variant="h5">{task.name}</Typography>
+                    <Typography variant="h5" style={{ color: '#1976d2' }}>{task.name}</Typography> {/* Blue color for task name */}
                     <Typography>Deadline: {new Date(task.deadline).toLocaleDateString()}</Typography>
                     <Typography>Assigned To: {task.assignedTo ? task.assignedTo.name : 'Unassigned'}</Typography>
-                    <Typography>Status: {task.status}</Typography>
+                    <Typography>Status: <span style={{ color: task.status === 'Completed' ? '#4caf50' : '#f44336' }}>{task.status}</span></Typography> {/* Color-coded status */}
                   </CardContent>
                   <CardActions>
                     {/* Display button for marking task as completed only if it's pending */}
