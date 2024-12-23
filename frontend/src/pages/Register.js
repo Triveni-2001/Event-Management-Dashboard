@@ -24,7 +24,7 @@ function Register() {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" style={{ backgroundColor: '#FFFFE0', padding: '20px', borderRadius: '8px' }}>
       <Box mt={5}>
         <Typography variant="h4" gutterBottom>Register</Typography>
         <TextField
