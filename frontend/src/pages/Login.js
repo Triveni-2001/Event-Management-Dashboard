@@ -1,4 +1,3 @@
-// src/pages/Login.js
 import React, { useState, useContext } from 'react';
 import { Container, Typography, TextField, Button, Box, Snackbar, Alert } from '@mui/material';
 import axios from 'axios';
@@ -42,46 +41,48 @@ function Login() {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box mt={5}>
-        <Typography variant="h4" gutterBottom>Login</Typography>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="Username"
-            name="username"
-            fullWidth
-            margin="normal"
-            value={form.username}
-            onChange={handleChange}
-            required
-          />
-          <TextField
-            label="Password"
-            name="password"
-            type="password"
-            fullWidth
-            margin="normal"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            fullWidth
-            style={{ marginTop: '20px' }}
-          >
-            Login
-          </Button>
-        </form>
-      </Box>
-      <Snackbar open={snackbar.open} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
-    </Container>
+    <Box sx={{ backgroundColor: '#f0f8ff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Container maxWidth="sm" sx={{ backgroundColor: '#FFCDD2', borderRadius: '8px', boxShadow: 3, padding: 4 }}>
+        <Box mt={3}>
+          <Typography variant="h4" gutterBottom>Login</Typography>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="Username"
+              name="username"
+              fullWidth
+              margin="normal"
+              value={form.username}
+              onChange={handleChange}
+              required
+            />
+            <TextField
+              label="Password"
+              name="password"
+              type="password"
+              fullWidth
+              margin="normal"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+            <Button
+              variant="contained"
+              color="#006400"
+              type="submit"
+              fullWidth
+              style={{ marginTop: '20px' }}
+            >
+              Login
+            </Button>
+          </form>
+        </Box>
+        <Snackbar open={snackbar.open} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+          <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+            {snackbar.message}
+          </Alert>
+        </Snackbar>
+      </Container>
+    </Box>
   );
 }
 
