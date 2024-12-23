@@ -3,15 +3,21 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Button, Modal, Box, TextField, Grid, Card, CardContent, CardActions, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import axios from 'axios';
 
-const style = {
+const modalStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
+  bgcolor: '#90EE90', // light orange background color
   boxShadow: 24,
   p: 4,
+};
+
+const containerStyle = {
+  backgroundColor: '#FFF3E0', // Light orange shade
+  minHeight: '100vh',
+  padding: '20px',
 };
 
 function AttendeeManagement() {
@@ -45,7 +51,10 @@ function AttendeeManagement() {
   };
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => { setOpen(false); setForm({ name: '', email: '' }); };
+  const handleClose = () => {
+    setOpen(false);
+    setForm({ name: '', email: '' });
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -98,69 +107,71 @@ function AttendeeManagement() {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>Attendee Management</Typography>
-      <Button variant="contained" color="primary" onClick={handleOpen}>Add Attendee</Button>
-      <Grid container spacing={2} style={{ marginTop: '20px' }}>
-        {attendees.map(attendee => (
-          <Grid item xs={12} sm={6} md={4} key={attendee._id}>
-            <Card>
-              <CardContent>
-                <Typography variant="h5">{attendee.name}</Typography>
-                <Typography color="textSecondary">{attendee.email}</Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" color="secondary" onClick={() => handleDelete(attendee._id)}>Delete</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+    <Box sx={containerStyle}>
+      <Container>
+        <Typography variant="h4" gutterBottom>Attendee Management</Typography>
+        <Button variant="contained" color="primary" onClick={handleOpen}>Add Attendee</Button>
+        <Grid container spacing={2} style={{ marginTop: '20px' }}>
+          {attendees.map((attendee) => (
+            <Grid item xs={12} sm={6} md={4} key={attendee._id}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h5">{attendee.name}</Typography>
+                  <Typography color="textSecondary">{attendee.email}</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" color="secondary" onClick={() => handleDelete(attendee._id)}>Delete</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
 
-      {/* Add Attendee Modal */}
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <Typography variant="h6" gutterBottom>Add New Attendee</Typography>
-          <TextField label="Name" name="name" fullWidth margin="normal" value={form.name} onChange={handleChange} required />
-          <TextField label="Email" name="email" type="email" fullWidth margin="normal" value={form.email} onChange={handleChange} required />
-          <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: '10px' }}>Submit</Button>
+        {/* Add Attendee Modal */}
+        <Modal open={open} onClose={handleClose}>
+          <Box sx={modalStyle}>
+            <Typography variant="h6" gutterBottom>Add New Attendee</Typography>
+            <TextField label="Name" name="name" fullWidth margin="normal" value={form.name} onChange={handleChange} required />
+            <TextField label="Email" name="email" type="email" fullWidth margin="normal" value={form.email} onChange={handleChange} required />
+            <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: '10px' }}>Submit</Button>
+          </Box>
+        </Modal>
+
+        {/* Assign Attendee to Event */}
+        <Box mt={4}>
+          <Typography variant="h6">Assign Attendee to Event</Typography>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="attendee-select-label">Attendee</InputLabel>
+            <Select
+              labelId="attendee-select-label"
+              name="attendeeId"
+              value={assign.attendeeId}
+              label="Attendee"
+              onChange={handleAssignChange}
+            >
+              {attendees.map((attendee) => (
+                <MenuItem key={attendee._id} value={attendee._id}>{attendee.name}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="event-select-label">Event</InputLabel>
+            <Select
+              labelId="event-select-label"
+              name="eventId"
+              value={assign.eventId}
+              label="Event"
+              onChange={handleAssignChange}
+            >
+              {events.map((event) => (
+                <MenuItem key={event._id} value={event._id}>{event.name}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button variant="contained" color="primary" onClick={handleAssign}>Assign</Button>
         </Box>
-      </Modal>
-
-      {/* Assign Attendee to Event */}
-      <Box mt={4}>
-        <Typography variant="h6">Assign Attendee to Event</Typography>
-        <FormControl fullWidth margin="normal">
-          <InputLabel id="attendee-select-label">Attendee</InputLabel>
-          <Select
-            labelId="attendee-select-label"
-            name="attendeeId"
-            value={assign.attendeeId}
-            label="Attendee"
-            onChange={handleAssignChange}
-          >
-            {attendees.map(attendee => (
-              <MenuItem key={attendee._id} value={attendee._id}>{attendee.name}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth margin="normal">
-          <InputLabel id="event-select-label">Event</InputLabel>
-          <Select
-            labelId="event-select-label"
-            name="eventId"
-            value={assign.eventId}
-            label="Event"
-            onChange={handleAssignChange}
-          >
-            {events.map(event => (
-              <MenuItem key={event._id} value={event._id}>{event.name}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <Button variant="contained" color="primary" onClick={handleAssign}>Assign</Button>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 }
 
