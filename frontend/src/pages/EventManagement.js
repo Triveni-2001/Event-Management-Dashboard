@@ -81,17 +81,19 @@ function EventManagement() {
   }));
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>Event Management</Typography>
-      <Button variant="contained" color="primary" onClick={handleOpen}>Add Event</Button>
+    <Container style={{ backgroundColor: '#FFFFE0', padding: '20px', borderRadius: '8px' }}>
+      <Typography variant="h4" gutterBottom style={{ color: '#FF5722' }}>Event Management</Typography>
+      <Button variant="contained" color="warning" onClick={handleOpen} style={{ marginBottom: '20px' }}>
+        Add Event
+      </Button>
 
       {/* Event List Section */}
       <Grid container spacing={2} style={{ marginTop: '20px' }}>
         {events.map(event => (
           <Grid item xs={12} sm={6} md={4} key={event._id}>
-            <Card>
+            <Card style={{ backgroundColor: '#FFF3E0', boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)' }}>
               <CardContent>
-                <Typography variant="h5">{event.name}</Typography>
+                <Typography variant="h5" style={{ color: '#FF5722' }}>{event.name}</Typography>
                 <Typography color="textSecondary">{event.description}</Typography>
                 <Typography>Location: {event.location}</Typography>
                 <Typography>Date: {new Date(event.date).toLocaleDateString()}</Typography>
@@ -107,7 +109,7 @@ function EventManagement() {
 
       {/* Calendar View Section */}
       <Box mt={4}>
-        <Typography variant="h6" gutterBottom>Calendar View</Typography>
+        <Typography variant="h6" gutterBottom style={{ color: '#FF5722' }}>Calendar View</Typography>
         <FullCalendar
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
@@ -122,12 +124,12 @@ function EventManagement() {
       {/* Add Event Modal */}
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <Typography variant="h6" gutterBottom>Add New Event</Typography>
+          <Typography variant="h6" gutterBottom style={{ color: '#FF5722' }}>Add New Event</Typography>
           <TextField label="Name" name="name" fullWidth margin="normal" value={form.name} onChange={handleChange} required />
           <TextField label="Description" name="description" fullWidth margin="normal" value={form.description} onChange={handleChange} />
           <TextField label="Location" name="location" fullWidth margin="normal" value={form.location} onChange={handleChange} required />
           <TextField label="Date" name="date" type="date" fullWidth margin="normal" value={form.date} onChange={handleChange} InputLabelProps={{ shrink: true }} required />
-          <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: '10px' }}>Submit</Button>
+          <Button variant="contained" color="warning" onClick={handleSubmit} style={{ marginTop: '10px' }}>Submit</Button>
         </Box>
       </Modal>
     </Container>
