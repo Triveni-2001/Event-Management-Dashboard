@@ -2,13 +2,13 @@ import React, { useState, useContext } from 'react';
 import { Container, Typography, TextField, Button, Box, Snackbar, Alert } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext'; // We'll create this next
+import { AuthContext } from '../contexts/AuthContext';
 
 function Login() {
   const [form, setForm] = useState({ username: '', password: '' });
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // Access login function from context
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -41,7 +41,17 @@ function Login() {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#f0f8ff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Box
+      sx={{
+        backgroundImage: 'url(https://image.slidesdocs.com/responsive-images/background/technology-business-abstract-high-tech-blue-light-effect-powerpoint-background_a5a4cf1965__960_540.jpg)', // Add path to your background image here
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Container maxWidth="sm" sx={{ backgroundColor: '#FFCDD2', borderRadius: '8px', boxShadow: 3, padding: 4 }}>
         <Box mt={3}>
           <Typography variant="h4" gutterBottom>Login</Typography>
@@ -67,7 +77,7 @@ function Login() {
             />
             <Button
               variant="contained"
-              color="#006400"
+              color="success" // You can change this to any predefined color
               type="submit"
               fullWidth
               style={{ marginTop: '20px' }}
