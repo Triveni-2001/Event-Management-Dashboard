@@ -14,21 +14,28 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" style={{ backgroundColor: '#FFA07A' }}>
+    <AppBar
+      position="static"
+      sx={{
+        backgroundImage: 'url("https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-blue-smart-light-tech-background-backgroundlight-effect-backgroundelectronic-image_81225.jpg")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       <Toolbar>
-        <Typography variant="h6" style={{ flexGrow: 1, color: '#FFF' }}>
+        <Typography variant="h6" sx={{ flexGrow: 1, color: '#FFF' }}>
           Event Management Dashboard
         </Typography>
-        <Button color="inherit" component={Link} to="/" style={{ color: '#FFF' }}>
+        <Button color="inherit" component={Link} to="/" sx={{ color: '#FFF' }}>
           Events
         </Button>
-        <Button color="inherit" component={Link} to="/attendees" style={{ color: '#FFF' }}>
+        <Button color="inherit" component={Link} to="/attendees" sx={{ color: '#FFF' }}>
           Attendees
         </Button>
-        <Button color="inherit" component={Link} to="/tasks" style={{ color: '#FFF' }}>
+        <Button color="inherit" component={Link} to="/tasks" sx={{ color: '#FFF' }}>
           Tasks
         </Button>
-        <Button color="inherit" onClick={handleLogout} style={{ color: '#FFF' }}>
+        <Button color="inherit" onClick={handleLogout} sx={{ color: '#FFF' }}>
           Logout
         </Button>
       </Toolbar>
