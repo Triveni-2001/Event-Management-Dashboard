@@ -1,4 +1,3 @@
-// src/pages/EventManagement.js
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Button, Modal, Box, TextField, Grid, Card, CardContent, CardActions } from '@mui/material';
@@ -24,19 +23,19 @@ function EventManagement() {
 
   // Fetch events on component mount
   useEffect(() => {
-    getEvents()  // Using the getEvents function from api.js
+    getEvents() // Using the getEvents function from api.js
       .then(response => {
-        setEvents(response.data);  // Setting fetched events to state
+        setEvents(response.data); // Setting fetched events to state
       })
       .catch(error => {
-        console.error('Error fetching events:', error);  // Handling errors
+        console.error('Error fetching events:', error); // Handling errors
       });
-  }, []);  // Empty dependency array to run once on mount
+  }, []); // Empty dependency array to run once on mount
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => { 
-    setOpen(false); 
-    setForm({ name: '', description: '', location: '', date: '' }); 
+  const handleClose = () => {
+    setOpen(false);
+    setForm({ name: '', description: '', location: '', date: '' });
   };
 
   const handleChange = (e) => {
@@ -50,8 +49,8 @@ function EventManagement() {
       return;
     }
     try {
-      await createEvent(form);  // Using createEvent function from api.js
-      getEvents()  // Refresh the event list after creation
+      await createEvent(form); // Using createEvent function from api.js
+      getEvents() // Refresh the event list after creation
         .then(response => setEvents(response.data));
       handleClose();
     } catch (error) {
@@ -64,7 +63,7 @@ function EventManagement() {
     if (window.confirm('Are you sure you want to delete this event?')) {
       try {
         await axios.delete(`http://localhost:5000/api/events/${id}`);
-        getEvents()  // Refresh event list after deletion
+        getEvents() // Refresh event list after deletion
           .then(response => setEvents(response.data));
       } catch (error) {
         console.error(error);
@@ -81,7 +80,17 @@ function EventManagement() {
   }));
 
   return (
-    <Container style={{ backgroundColor: '#FFFFE0', padding: '20px', borderRadius: '8px' }}>
+    <Container
+      style={{
+        backgroundImage: "url('https://media.istockphoto.com/id/1010120838/vector/abstract-innovation-technology-and-digital-hi-tech-background-vector-illustration.jpg?s=612x612&w=0&k=20&c=CTKpKcmDzE69EB0bz7_CpAJc6WUelaEtA7IIP_ZtBdo=')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh',
+        padding: '20px',
+        borderRadius: '8px',
+      }}
+    >
       <Typography variant="h4" gutterBottom style={{ color: '#FF5722' }}>Event Management</Typography>
       <Button variant="contained" color="warning" onClick={handleOpen} style={{ marginBottom: '20px' }}>
         Add Event
@@ -109,7 +118,7 @@ function EventManagement() {
 
       {/* Calendar View Section */}
       <Box mt={4}>
-        <Typography variant="h6" gutterBottom style={{ color: '#FF5722' }}>Calendar View</Typography>
+        <Typography variant="h6" gutterBottom style={{ color: '#800080' }}>Calendar View</Typography>
         <FullCalendar
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
@@ -123,15 +132,63 @@ function EventManagement() {
 
       {/* Add Event Modal */}
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <Typography variant="h6" gutterBottom style={{ color: '#FF5722' }}>Add New Event</Typography>
-          <TextField label="Name" name="name" fullWidth margin="normal" value={form.name} onChange={handleChange} required />
-          <TextField label="Description" name="description" fullWidth margin="normal" value={form.description} onChange={handleChange} />
-          <TextField label="Location" name="location" fullWidth margin="normal" value={form.location} onChange={handleChange} required />
-          <TextField label="Date" name="date" type="date" fullWidth margin="normal" value={form.date} onChange={handleChange} InputLabelProps={{ shrink: true }} required />
-          <Button variant="contained" color="warning" onClick={handleSubmit} style={{ marginTop: '10px' }}>Submit</Button>
-        </Box>
-      </Modal>
+  <Box
+    sx={{
+      ...style,
+      bgcolor: '#FFFFE0', // Light Yellow background color
+    }}
+  >
+    <Typography variant="h6" gutterBottom style={{ color: '#9932CC' }}>
+      Add New Event
+    </Typography>
+    <TextField
+      label="Name"
+      name="name"
+      fullWidth
+      margin="normal"
+      value={form.name}
+      onChange={handleChange}
+      required
+    />
+    <TextField
+      label="Description"
+      name="description"
+      fullWidth
+      margin="normal"
+      value={form.description}
+      onChange={handleChange}
+    />
+    <TextField
+      label="Location"
+      name="location"
+      fullWidth
+      margin="normal"
+      value={form.location}
+      onChange={handleChange}
+      required
+    />
+    <TextField
+      label="Date"
+      name="date"
+      type="date"
+      fullWidth
+      margin="normal"
+      value={form.date}
+      onChange={handleChange}
+      InputLabelProps={{ shrink: true }}
+      required
+    />
+    <Button
+      variant="contained"
+      color="warning"
+      onClick={handleSubmit}
+      style={{ marginTop: '10px' }}
+    >
+      Submit
+    </Button>
+  </Box>
+</Modal>
+
     </Container>
   );
 }
