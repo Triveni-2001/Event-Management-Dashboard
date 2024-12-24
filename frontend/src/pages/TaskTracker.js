@@ -73,7 +73,16 @@ function TaskTracker() {
   };
 
   return (
-    <Container style={{ backgroundColor: '#f0f8ff', padding: '20px' }}> {/* light background color */}
+    <Container 
+      style={{
+        backgroundColor: '#f0f8ff', 
+        padding: '20px', 
+        backgroundImage: 'url("https://freedesignfile.com/upload/2017/01/Light-blue-tech-background-vector-08.jpg")',  // Add your image URL here
+        backgroundSize: 'cover',  // Ensures the image covers the entire container
+        backgroundPosition: 'center',  // Centers the image
+        backgroundAttachment: 'fixed',  // Makes the background image fixed during scrolling
+      }}
+    >
       <Typography variant="h4" gutterBottom style={{ color: '#4caf50' }}>Task Tracker</Typography> {/* Green color for title */}
 
       {/* Event Selection Dropdown */}
