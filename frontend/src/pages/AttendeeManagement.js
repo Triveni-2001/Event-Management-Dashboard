@@ -1,4 +1,3 @@
-// src/pages/AttendeeManagement.js
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Button, Modal, Box, TextField, Grid, Card, CardContent, CardActions, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import axios from 'axios';
@@ -15,9 +14,13 @@ const modalStyle = {
 };
 
 const containerStyle = {
-  backgroundColor: '#FFF3E0', // Light orange shade
+  backgroundImage: "url('https://th.bing.com/th/id/R.f476eaa362d4a87e74de6a24759792ce?rik=kBc%2fK4hL8o6goQ&riu=http%3a%2f%2fbaltana.com%2ffiles%2fwallpapers-2%2fBusiness-Powerpoint-Background-06764.jpg&ehk=CSOGAPZZaAz2Yg8yo6c2S39g8Ko88jFBAQEaKoTrPH4%3d&risl=&pid=ImgRaw&r=0')", // Add your image URL here
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
   minHeight: '100vh',
   padding: '20px',
+  color: '#000', // Text color for better readability
 };
 
 function AttendeeManagement() {
@@ -110,7 +113,7 @@ function AttendeeManagement() {
     <Box sx={containerStyle}>
       <Container>
         <Typography variant="h4" gutterBottom>Attendee Management</Typography>
-        <Button variant="contained" color="primary" onClick={handleOpen}>Add Attendee</Button>
+        <Button variant="contained" color="#FF00FF" onClick={handleOpen}>Add Attendee</Button>
         <Grid container spacing={2} style={{ marginTop: '20px' }}>
           {attendees.map((attendee) => (
             <Grid item xs={12} sm={6} md={4} key={attendee._id}>
@@ -168,7 +171,7 @@ function AttendeeManagement() {
               ))}
             </Select>
           </FormControl>
-          <Button variant="contained" color="primary" onClick={handleAssign}>Assign</Button>
+          <Button variant="contained" color="#FFFFFF" onClick={handleAssign}>Assign</Button>
         </Box>
       </Container>
     </Box>
